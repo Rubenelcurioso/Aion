@@ -78,5 +78,5 @@ GNU GENERAL PUBLIC LICENSE Version 3
 
 ## Contact
 - [GitHub](https://github.com/rubenelcurioso)
-- [LinkedIn](https://www.linkedin.com/in/rubenelcurioso)
+- [LinkedIn](https://www.linkedin.com/in/rub%C3%A9n-rosales-01b114356/)
 - [Blog](https://rubenelcurioso.github.io)
