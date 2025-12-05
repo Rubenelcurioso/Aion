@@ -124,3 +124,5 @@ ignore
 .aider*
 
 .cursorignore
+
+QWEN.md
