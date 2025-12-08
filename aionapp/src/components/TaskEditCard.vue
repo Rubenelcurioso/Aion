@@ -127,28 +127,28 @@ export default {
 
     const loadTaskData = async () => {
       try {
-        const obj_response = await apiGet(`/task/${props.taskId}/`);
-        taskName.value = obj_response.name;
-        startDate.value = obj_response.start_date;
-        endDate.value = obj_response.end_date;
-        priority.value = obj_response.priority;
-        status.value = obj_response.status;
-        assignedUser.value = obj_response.user_assigned;
-        assignedTeam.value = obj_response.team_assigned;
-      } catch (obj_error) {
-        console.error('Error loading task data:', obj_error);
+        const response = await apiGet(`/task/${props.taskId}/`);
+        taskName.value = response.name;
+        startDate.value = response.start_date;
+        endDate.value = response.end_date;
+        priority.value = response.priority;
+        status.value = response.status;
+        assignedUser.value = response.user_assigned;
+        assignedTeam.value = response.team_assigned;
+      } catch (error) {
+        console.error('Error loading task data:', error);
       }
     };
 
     const loadUserOptions = async () => {
-      const obj_response = await apiGet('/project/'+route.params.pid+'/users/');
-      userOptions.value = obj_response.map(obj_user => ({ label: obj_user.username, value: obj_user.id }));
+      const response = await apiGet('/project/'+route.params.pid+'/users/');
+      userOptions.value = response.map(user => ({ label: user.username, value: user.id }));
     };
 
     const loadTeamOptions = async () => {
-      const int_business_id = store.projects.find(obj_project => obj_project.id === parseInt(route.params.pid)).business;
-      const obj_response = await apiGet(`/business/${int_business_id}/teams/`);
-      teamOptions.value = obj_response.map(obj_team => ({ label: obj_team.name, value: obj_team.id }));
+      const business_id = store.projects.find(project => project.id === parseInt(route.params.pid)).business;
+      const response = await apiGet(`/business/${business_id}/teams/`);
+      teamOptions.value = response.map(team => ({ label: team.name, value: team.id }));
     };
 
     onMounted(() => {
@@ -173,7 +173,7 @@ export default {
 
     const onSubmit = async () => {
       try {
-        const obj_taskData = {
+        const taskData = {
           name: taskName.value,
           start_date: startDate.value,
           end_date: endDate.value,
@@ -183,11 +183,11 @@ export default {
           team_assigned: assignedTeam.value ? assignedTeam.value.value : null,
           status: status.value
         };
-        await apiPut(`/task/${props.taskId}/`, obj_taskData);
+        await apiPut(`/task/${props.taskId}/`, taskData);
         emit('task-updated');
         closeDialog();
-      } catch (obj_error) {
-        console.error('Error updating task:', obj_error);
+      } catch (error) {
+        console.error('Error updating task:', error);
         $q.notify({ type: 'negative', message: 'Error updating task', position: 'bottom-right' })
       }
     };

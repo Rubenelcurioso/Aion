@@ -86,22 +86,22 @@ export default defineComponent({
 
     const fetchTasks = async () => {
           try {
-            let obj_response;
+            let response;
             if(!props.team)
-              obj_response = await apiGet(`/user/${store.uid}/tasks/`);
+              response = await apiGet(`/user/${store.uid}/tasks/`);
             else
-              obj_response = await apiGet(`/user/${store.uid}/team/tasks/`);
+              response = await apiGet(`/user/${store.uid}/team/tasks/`);
 
-            tasks.value = obj_response;
-          } catch (obj_error) {
-            console.error('Error fetching tasks:', obj_error);
+            tasks.value = response;
+          } catch (error) {
+            console.error('Error fetching tasks:', error);
             // Handle the error appropriately, e.g., show an error message to the user
           }
     };
 
-    const formatDate = (str_dateString) => {
-      if (!str_dateString) return '';
-      return date.formatDate(str_dateString, 'YYYY-MM-DD');
+    const formatDate = (dateString) => {
+      if (!dateString) return '';
+      return date.formatDate(dateString, 'YYYY-MM-DD');
     };
 
     onMounted(() => {

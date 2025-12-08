@@ -115,23 +115,23 @@ export default {
 
     const loadTeamData = async () => {
       try {
-        const obj_response = await apiGet(`/team/${props.bid}/${props.team}/`);
-        teamName.value = obj_response.name;
-        teamDescription.value = obj_response.description;
-        const obj_res = await apiGet(`/employees/${props.bid}/${props.team}/`);
-        addedMembers.value = obj_res.map(obj_member => obj_member.username);
-      } catch (obj_error) {
-        console.error('Error loading team data:', obj_error);
+        const response = await apiGet(`/team/${props.bid}/${props.team}/`);
+        teamName.value = response.name;
+        teamDescription.value = response.description;
+        const res = await apiGet(`/employees/${props.bid}/${props.team}/`);
+        addedMembers.value = res.map(member => member.username);
+      } catch (error) {
+        console.error('Error loading team data:', error);
       }
     };
 
-    const onSearchUser = async (str_val) => {
-      if (str_val.length >= 3) {
+    const onSearchUser = async (val) => {
+      if (val.length >= 3) {
         try {
-          const obj_response = await apiGet('/employees/username/'+ props.bid + '/' + encodeURIComponent(str_val) + '/');
-          filteredUsers.value = obj_response;
-        } catch (obj_error) {
-          console.error('Error searching for users:', obj_error);
+          const response = await apiGet('/employees/username/'+ props.bid + '/' + encodeURIComponent(val) + '/');
+          filteredUsers.value = response;
+        } catch (error) {
+          console.error('Error searching for users:', error);
         }
       } else {
         filteredUsers.value = [];
@@ -170,16 +170,16 @@ export default {
 
     const onSubmit = async () => {
       try {
-        const obj_teamData = {
+        const teamData = {
           id: props.team,
           name: teamName.value,
           description: teamDescription.value,
         };
-        await apiPut(`/team/update/`, obj_teamData);
+        await apiPut(`/team/update/`, teamData);
         emit('team-updated');
         closeDialog();
-      } catch (obj_error) {
-        console.error('Error updating team:', obj_error);
+      } catch (error) {
+        console.error('Error updating team:', error);
       }
     };
 

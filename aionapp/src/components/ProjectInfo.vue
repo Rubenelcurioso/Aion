@@ -50,13 +50,13 @@ export default defineComponent({
 
     const fetchProjectData = async () => {
       try {
-        const obj_response = await apiGet('/project/'+project_id+'/');
-        description.value = obj_response.description;
-        creationDate.value = obj_response.start_date;
-        endingDate.value = obj_response.end_date;
-        progression.value = obj_response.progress;
-        businessName.value = obj_response.business_name;
-      } catch (obj_error) {
+        const response = await apiGet('/project/'+project_id+'/');
+        description.value = response.description;
+        creationDate.value = response.start_date;
+        endingDate.value = response.end_date;
+        progression.value = response.progress;
+        businessName.value = response.business_name;
+      } catch (error) {
         $q.notify({
           type: 'negative',
           message: 'Error fetching project data',
@@ -70,7 +70,7 @@ export default defineComponent({
     });
 
     const editProjectDialog = () => {
-      if(store.projects.find(obj_project => obj_project.id === project_id).role_perm >= 63){
+      if(store.projects.find(project => project.id === project_id).role_perm >= 63){
         editDialogVisible.value = true;
       } else {
         $q.notify({

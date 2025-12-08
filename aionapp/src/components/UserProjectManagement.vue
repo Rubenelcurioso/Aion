@@ -81,10 +81,10 @@ export default {
 
     const fetchUserProject = async () => {
       try {
-        const obj_response = await apiGet(`/project/${props.pid}/users/`);
-        users.value = obj_response;
-      } catch (obj_error) {
-        console.error('Error fetching users:', obj_error);
+        const response = await apiGet(`/project/${props.pid}/users/`);
+        users.value = response;
+      } catch (error) {
+        console.error('Error fetching users:', error);
       }
     }
 

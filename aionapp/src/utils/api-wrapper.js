@@ -11,15 +11,15 @@ import { setToken, setRefreshToken, getValidToken, getRefreshToken } from './tok
  */
 export async function apiGet(url, config = {}) {
   try {
-    const str_token = await getValidToken();
-    const obj_response = await api.get(url, {
+    const token = await getValidToken();
+    const response = await api.get(url, {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${str_token}`
+        Authorization: `Bearer ${token}`
       }
     });
-    return obj_response.data;
+    return response.data;
   } catch (error) {
     handleApiError(error);
   }
@@ -37,19 +37,19 @@ export async function apiGet(url, config = {}) {
  */
 export async function apiPost(url, data, config = {}) {
   try {
-    const obj_headers = { ...config.headers };
+    const headers = { ...config.headers };
     if (url !== '/register/' && url !== '/login/') {
-      const str_token = await getValidToken();
-      obj_headers.Authorization = `Bearer ${str_token}`;
+      const token = await getValidToken();
+      headers.Authorization = `Bearer ${token}`;
     }
     if (url === '/logout/') data.rTkn = getRefreshToken(); // Add refresh token to the request data
 
-    const obj_response = await api.post(url, data, {
+    const response = await api.post(url, data, {
       ...config,
-      headers: obj_headers
+      headers: headers
     });
 
-    return obj_response.data;
+    return response.data;
   } catch (error) {
     handleApiError(error);
   }
