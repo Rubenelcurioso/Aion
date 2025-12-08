@@ -35,11 +35,11 @@
 
       const logout = async () => {
         try {
-          const response = await apiPost('/logout/', {})
+          const obj_response = await apiPost('/logout/', {})
           removeTokens()
           router.push('/login')
-        } catch (error) {
-          console.error('Logout failed', error)
+        } catch (obj_error) {
+          console.error('Logout failed', obj_error)
         }
       }
 

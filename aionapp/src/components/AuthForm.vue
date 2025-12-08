@@ -59,13 +59,13 @@
       const formData = reactive({})
 
       // Initialize formData with empty strings for each field
-      props.fields.forEach(field => {
-        formData[field.name] = ''
+      props.fields.forEach(obj_field => {
+        obj_formData[obj_field.name] = ''
       })
 
       const validate = () => {
-          formRef.value.validate().then(success =>{
-            if(success){
+          obj_formRef.value.validate().then(bln_success =>{
+            if(bln_success){
               return true
             }else{
               console.log('One or more fields are not valid')
@@ -75,20 +75,20 @@
       }
 
       const reset = () => {
-        formRef.value.resetValidation()
+        obj_formRef.value.resetValidation()
       }
 
       const onSubmit = () => {
-        const isValid = formRef.value.validate()
-        if (isValid) {
-          emit('submit', formData)
+        const bln_isValid = obj_formRef.value.validate()
+        if (bln_isValid) {
+          emit('submit', obj_formData)
           reset()
         }
       }
 
       return {
-        formRef,
-        formData,
+        formRef: obj_formRef,
+        formData: obj_formData,
         validate,
         reset,
         onSubmit

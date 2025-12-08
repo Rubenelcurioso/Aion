@@ -119,15 +119,15 @@ export default {
     const $q = useQuasar();
 
     const loadUserOptions = async () => {
-      const response = await apiGet('/project/'+route.params.pid+'/users/');
-      userOptions.value = response.map(user => ({ label: user.username, value: user.id }));
+      const obj_response = await apiGet('/project/'+route.params.pid+'/users/');
+      userOptions.value = obj_response.map(obj_user => ({ label: obj_user.username, value: obj_user.id }));
     };
 
     const loadTeamOptions = async () => {
-      const business_id = store.projects.find(project => project.id === parseInt(route.params.pid)).business;
-      if(!business_id) return;
-      const response = await apiGet(`/business/${business_id}/teams/`);
-      teamOptions.value = response.map(team => ({ label: team.name, value: team.id }));
+      const int_business_id = store.projects.find(obj_project => obj_project.id === parseInt(route.params.pid)).business;
+      if(!int_business_id) return;
+      const obj_response = await apiGet(`/business/${int_business_id}/teams/`);
+      teamOptions.value = obj_response.map(obj_team => ({ label: obj_team.name, value: obj_team.id }));
     };
 
     onMounted(() => {
@@ -151,7 +151,7 @@ export default {
 
     const onSubmit = async () => {
       try {
-        const taskData = {
+        const obj_taskData = {
           name: taskName.value,
           start_date: startDate.value,
           end_date: endDate.value,
@@ -161,10 +161,10 @@ export default {
           team_assigned: assignedTeam.value ? assignedTeam.value.value : null,
           status: status.value
         };
-        await apiPost('/new/task/', taskData);
+        await apiPost('/new/task/', obj_taskData);
         emit('task-created');
-      } catch (error) {
-        console.error('Error creating task:', error);
+      } catch (obj_error) {
+        console.error('Error creating task:', obj_error);
         $q.notify({ type: 'negative', message: 'Error creating task', position: 'bottom-right' });
       }
     };

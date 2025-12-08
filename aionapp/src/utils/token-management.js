@@ -2,8 +2,8 @@ import { api } from 'boot/axios';
 import { LocalStorage } from 'quasar';
 
 
-const TOKEN_KEY = 'aTkn';
-const REFRESH_TOKEN_KEY = 'rTkn';
+const str_TOKEN_KEY = 'aTkn';
+const str_REFRESH_TOKEN_KEY = 'rTkn';
 
 /**
  * Gets the access token stored in the local storage.
@@ -11,7 +11,7 @@ const REFRESH_TOKEN_KEY = 'rTkn';
  * @returns {string} The access token.
  */
 export function getToken() {
-  return LocalStorage.getItem(TOKEN_KEY);
+  return LocalStorage.getItem(str_TOKEN_KEY);
 }
 
 /**
@@ -20,12 +20,12 @@ export function getToken() {
  * @param {string} token - The access token to be stored.
  */
 export function setToken(token) {
-  LocalStorage.set(TOKEN_KEY, token);
+  LocalStorage.set(str_TOKEN_KEY, token);
   LocalStorage.set('tsa', Date.now());
 }
 
 export function getRefreshToken() {
-  return LocalStorage.getItem(REFRESH_TOKEN_KEY);
+  return LocalStorage.getItem(str_REFRESH_TOKEN_KEY);
 }
 
 /**
@@ -34,7 +34,7 @@ export function getRefreshToken() {
  * @param {string} refreshToken - The refresh token to be stored.
  */
 export function setRefreshToken(refreshToken) { // Change here Cookie secure when get the HTTPS certs
-  LocalStorage.set(REFRESH_TOKEN_KEY, refreshToken);
+  LocalStorage.set(str_REFRESH_TOKEN_KEY, refreshToken);
   LocalStorage.set('tsr', Date.now());
 }
 

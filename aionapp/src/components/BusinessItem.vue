@@ -58,11 +58,11 @@ export default {
 
     const fetchBusinesses = async () => {
       try {
-        const response = await apiGet('/user/'+`${store.uid}`+'/businesses/')
-        businesses.value = response
-        store.setBusinesses(response)
-      } catch (error) {
-        console.error('Error fetching businesses:', error)
+        const obj_response = await apiGet('/user/'+`${store.uid}`+'/businesses/')
+        businesses.value = obj_response
+        store.setBusinesses(obj_response)
+      } catch (obj_error) {
+        console.error('Error fetching businesses:', obj_error)
       }
     }
 
@@ -75,8 +75,8 @@ export default {
       try {
         await apiDelete(`/remove/business/${businessToDelete.value}/`)
         await fetchBusinesses()
-      } catch (error) {
-        console.error('Error deleting business:', error)
+      } catch (obj_error) {
+        console.error('Error deleting business:', obj_error)
       }
     }
 

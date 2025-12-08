@@ -14,45 +14,45 @@ class UserRegistration(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        serializer = UserRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            refresh = RefreshToken.for_user(user)
+        obj_serializer = UserRegistrationSerializer(data=request.data)
+        if obj_serializer.is_valid():
+            obj_user = obj_serializer.save()
+            obj_refresh = RefreshToken.for_user(obj_user)
             return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-                'user': user.id,
-                'username': user.username,
+                'refresh': str(obj_refresh),
+                'access': str(obj_refresh.access_token),
+                'user': obj_user.id,
+                'username': obj_user.username,
                 'ts': int(datetime.now().timestamp()) # Retrieves in microseconds
             }, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(obj_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserLogin(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
-        if serializer.is_valid():
-                user = serializer.validated_data
-                refresh = RefreshToken.for_user(user)
+        obj_serializer = UserLoginSerializer(data=request.data)
+        if obj_serializer.is_valid():
+                obj_user = obj_serializer.validated_data
+                obj_refresh = RefreshToken.for_user(obj_user)
                 return Response({
-                    'refresh': str(refresh),
-                    'access': str(refresh.access_token),
-                    'user': user.id,
-                    'username': user.username,
+                    'refresh': str(obj_refresh),
+                    'access': str(obj_refresh.access_token),
+                    'user': obj_user.id,
+                    'username': obj_user.username,
                     'ts': int(datetime.now().timestamp()) # Retrieves in microseconds
                 }, status=status.HTTP_200_OK)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(obj_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserLogout(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        refresh_token = request.data.get('rTkn')
-        if refresh_token:
+        str_refresh_token = request.data.get('rTkn')
+        if str_refresh_token:
             try:
-                token = RefreshToken(refresh_token)
-                token.blacklist()
+                obj_token = RefreshToken(str_refresh_token)
+                obj_token.blacklist()
                 return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response({'error': 'Invalid refresh token'}, status=status.HTTP_400_BAD_REQUEST)
@@ -64,8 +64,8 @@ class UserDetail(APIView):
 
     def get(self, request, id):
         try:
-            user = User.objects.get(id=id)
-            return Response({'username': user.username}, status=status.HTTP_200_OK)
+            obj_user = User.objects.get(id=id)
+            return Response({'username': obj_user.username}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -76,57 +76,57 @@ class BusinessList(APIView):
     def get(self, request, business_id=None):
         if (business_id):
             try:
-                business = Business.objects.get(id=business_id)
+                obj_business = Business.objects.get(id=business_id)
                 # Check if the user is an employee of the business
-                is_employee = Employee.objects.filter(user=request.user, business=business).exists()
-                if not is_employee:
+                b_is_employee = Employee.objects.filter(user=request.user, business=obj_business).exists()
+                if not b_is_employee:
                     return Response({'error': 'You are not an employee of this business'}, status=status.HTTP_403_FORBIDDEN)
-                serializer = BusinessSerializer(business)
+                obj_serializer = BusinessSerializer(obj_business)
             except Business.DoesNotExist:
                 return Response({'error': 'Business not found'}, status=status.HTTP_404_NOT_FOUND)
         else:
             # Get businesses where the user is an employee
-            businesses = Business.objects.filter(employee__user=request.user)
-            serializer = BusinessSerializer(businesses, many=True)
-        return Response(serializer.data)
+            arr_businesses = Business.objects.filter(employee__user=request.user)
+            obj_serializer = BusinessSerializer(arr_businesses, many=True)
+        return Response(obj_serializer.data)
     
     def post(self, request):
-        serializer = BusinessSerializer(data=request.data)
-        if serializer.is_valid():
+        obj_serializer = BusinessSerializer(data=request.data)
+        if obj_serializer.is_valid():
             try:
-                user = User.objects.get(id=request.user.id)
-                business = serializer.save(owner=user)
-                Employee.objects.create(user=user, business=business)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                obj_user = User.objects.get(id=request.user.id)
+                obj_business = obj_serializer.save(owner=obj_user)
+                Employee.objects.create(user=obj_user, business=obj_business)
+                return Response(obj_serializer.data, status=status.HTTP_201_CREATED)
             except User.DoesNotExist:
                 return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(obj_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
         try:
-            business_id = request.data.get('business')
-            print(business_id)
-            business = Business.objects.get(id=business_id)
+            int_business_id = request.data.get('business')
+            print(int_business_id)
+            obj_business = Business.objects.get(id=int_business_id)
             # Check if the user is the owner of the business
-            is_owner = business.owner != request.user
-            if is_owner:
+            b_is_owner = obj_business.owner != request.user
+            if b_is_owner:
                 return Response({'error': 'You are not authorized to update this business'}, status=status.HTTP_403_FORBIDDEN)
-            serializer = BusinessSerializer(business, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            obj_serializer = BusinessSerializer(obj_business, data=request.data, partial=True)
+            if obj_serializer.is_valid():
+                obj_serializer.save()
+                return Response(obj_serializer.data)
+            return Response(obj_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Business.DoesNotExist:
             return Response({'error': 'Business not found'}, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, business_id):
         try:
-            business = Business.objects.get(id=business_id)
-            has_permission = business.owner != request.user
-            if has_permission:
+            obj_business = Business.objects.get(id=business_id)
+            b_has_permission = obj_business.owner != request.user
+            if b_has_permission:
                 return Response({'error': 'You do not have permission to delete this business'}, status=status.HTTP_403_FORBIDDEN)
 
-            business.delete()
+            obj_business.delete()
             return Response({'message': 'Business deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         except Business.DoesNotExist:
             return Response({'error': 'Business not found'}, status=status.HTTP_404_NOT_FOUND)
