@@ -40,32 +40,32 @@ export const useUserStore = defineStore('user', {
         this.updateBusiness(businesses)
       }
     },
-    updateProject(project) {
-      const existingProject = this.projects.find(p => p.id === project.id)
-      
-      if (!existingProject) {
-        this.projects.push(project)
+    updateProject(obj_project) {
+      const obj_existingProject = this.projects.find(p => p.id === obj_project.id)
+
+      if (!obj_existingProject) {
+        this.projects.push(obj_project)
       } else {
-        const updatedFields = ['name', 'description', 'start_date', 'end_date', 'progress']
-        
-        updatedFields.forEach(field => {
-          if (existingProject[field] !== project[field]) {
-            existingProject[field] = project[field]
+        const arr_updatedFields = ['name', 'description', 'start_date', 'end_date', 'progress']
+
+        arr_updatedFields.forEach(str_field => {
+          if (obj_existingProject[str_field] !== obj_project[str_field]) {
+            obj_existingProject[str_field] = obj_project[str_field]
           }
         })
       }
     },
-    updateBusiness(business) {
-      const existingBusiness = this.businesses.find(b => b.id === business.id)
-      
-      if (!existingBusiness) {
-        this.businesses.push(business)
+    updateBusiness(obj_business) {
+      const obj_existingBusiness = this.businesses.find(b => b.id === obj_business.id)
+
+      if (!obj_existingBusiness) {
+        this.businesses.push(obj_business)
       } else {
-        const updatedFields = ['name', 'description', 'start_date', 'end_date', 'progress']
-        
-        updatedFields.forEach(field => {
-          if (existingBusiness[field] !== business[field]) {
-            existingBusiness[field] = business[field]
+        const arr_updatedFields = ['name', 'description', 'start_date', 'end_date', 'progress']
+
+        arr_updatedFields.forEach(str_field => {
+          if (obj_existingBusiness[str_field] !== obj_business[str_field]) {
+            obj_existingBusiness[str_field] = obj_business[str_field]
           }
         })
       }

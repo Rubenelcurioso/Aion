@@ -59,13 +59,13 @@ export default {
     const userStore = useUserStore();
     const $q = useQuasar();
 
-    const onSearchUser = async (val) => {
-      if (val.length >= 3) {
+    const onSearchUser = async (str_val) => {
+      if (str_val.length >= 3) {
         try {
-          const response = await apiGet('/username/' + encodeURIComponent(val) + '/');
-          filteredUsers.value = response;
-        } catch (error) {
-          console.error('Error searching for users:', error);
+          const obj_response = await apiGet('/username/' + encodeURIComponent(str_val) + '/');
+          filteredUsers.value = obj_response;
+        } catch (obj_error) {
+          console.error('Error searching for users:', obj_error);
         }
       } else {
         filteredUsers.value = [];
@@ -84,21 +84,21 @@ export default {
     }
 
     const onSubmit = async () => {
-      for (const employee of addedMembers.value) {
+      for (const str_employee of addedMembers.value) {
         try {
-          const response = await apiPost('/new/employee/', {
-            username: employee,
+          const obj_response = await apiPost('/new/employee/', {
+            username: str_employee,
             business: props.bid
           });
           $q.notify({
             type: 'positive',
-            message: `Employee ${employee} added successfully`,
+            message: `Employee ${str_employee} added successfully`,
             position: 'bottom-right'
           });
-        } catch (error) {
+        } catch (obj_error) {
           $q.notify({
             type: 'negative',
-            message: `Error adding employee ${employee}`,
+            message: `Error adding employee ${str_employee}`,
             position: 'bottom-right'
           });
         }

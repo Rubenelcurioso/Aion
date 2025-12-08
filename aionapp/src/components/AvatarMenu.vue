@@ -1,7 +1,7 @@
 <template>
     <q-btn flat round>
       <q-avatar size="26px" color="blue">
-        {{ store.username.charAt(0).toUpperCase() }}      
+        {{ store.username.charAt(0).toUpperCase() }}
       </q-avatar>
       <q-menu>
         <q-list style="min-width: 150px">
@@ -15,7 +15,7 @@
       </q-menu>
     </q-btn>
   </template>
-  
+
   <script>
  import { useRouter } from 'vue-router'
  import { apiPost } from '../utils/api-wrapper'
@@ -35,14 +35,14 @@
 
       const logout = async () => {
         try {
-          const response = await apiPost('/logout/', {})
+          const obj_response = await apiPost('/logout/', {})
           removeTokens()
           router.push('/login')
-        } catch (error) {
-          console.error('Logout failed', error)
+        } catch (obj_error) {
+          console.error('Logout failed', obj_error)
         }
       }
-  
+
       return {
         store,
         openSettings,

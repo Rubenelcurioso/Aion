@@ -24,13 +24,13 @@
       ])
   
       const unreadCount = computed(() => {
-        return notifications.value.filter(n => !n.read).length
+        return notifications.value.filter(obj_n => !obj_n.read).length
       })
-  
-      const markAsRead = (id) => {
-        const notification = notifications.value.find(n => n.id === id)
-        if (notification) {
-          notification.read = true
+
+      const markAsRead = (int_id) => {
+        const obj_notification = notifications.value.find(obj_n => obj_n.id === int_id)
+        if (obj_notification) {
+          obj_notification.read = true
         }
       }
   

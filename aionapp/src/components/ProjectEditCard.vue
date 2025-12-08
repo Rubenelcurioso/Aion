@@ -80,14 +80,14 @@ export default {
 
     const loadProjectData = async () => {
       try {
-        const response = await apiGet(`/project/${props.projectId}/`);
-        projectName.value = response.name;
-        startDate.value = response.start_date;
-        endDate.value = response.end_date;
-        description.value = response.description;
-        selectedBusiness.value = response.business.id;
-      } catch (error) {
-        console.error('Error loading project data:', error);
+        const obj_response = await apiGet(`/project/${props.projectId}/`);
+        projectName.value = obj_response.name;
+        startDate.value = obj_response.start_date;
+        endDate.value = obj_response.end_date;
+        description.value = obj_response.description;
+        selectedBusiness.value = obj_response.business.id;
+      } catch (obj_error) {
+        console.error('Error loading project data:', obj_error);
       }
     };
 
@@ -114,12 +114,12 @@ export default {
     ];
 
     const onSubmit = async () => {
-      if(store.projects.find(project => project.id === props.projectId).role_perm < 63){
+      if(store.projects.find(obj_project => obj_project.id === props.projectId).role_perm < 63){
         emit('project-updated');
         closeDialog();
       }else{
           try {
-          const projectData = {
+          const obj_projectData = {
             project_id: props.projectId,
             name: projectName.value,
             start_date: startDate.value,
@@ -128,14 +128,14 @@ export default {
             project_manager: projectManager.value,
             business: selectedBusiness.value
           };
-          await apiPut(`/project/update/`, projectData);
+          await apiPut(`/project/update/`, obj_projectData);
           emit('project-updated');
           closeDialog();
-        } catch (error) {
-          console.error('Error updating project:', error);
+        } catch (obj_error) {
+          console.error('Error updating project:', obj_error);
         }
       }
-      
+
     };
 
     const closeDialog = () => {

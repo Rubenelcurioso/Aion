@@ -43,11 +43,11 @@
 
       const fetchTeams = async () => {
         try {
-          const response = await apiGet(`user/${store.uid}/team/`)
-          teams.value = response;
-          console.log(response)
-        } catch (error) {
-          console.error('Error fetching teams:', error);
+          const obj_response = await apiGet(`user/${store.uid}/team/`)
+          teams.value = obj_response;
+          console.log(obj_response)
+        } catch (obj_error) {
+          console.error('Error fetching teams:', obj_error);
         }
       }
 

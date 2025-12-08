@@ -83,11 +83,11 @@ export default {
 
     const fetchRoles = async () => {
       try {
-        const response = await apiGet('/roles/');
-        roleOptions.value = response
-          .filter(role => role.name.toLowerCase() !== 'owner')
-          .map(role => ({ value: role.id, label: role.name }));   
-      } catch (error) {
+        const obj_response = await apiGet('/roles/');
+        roleOptions.value = obj_response
+          .filter(obj_role => obj_role.name.toLowerCase() !== 'owner')
+          .map(obj_role => ({ value: obj_role.id, label: obj_role.name }));
+      } catch (obj_error) {
         $q.notify({
           type: 'negative',
           message: 'Error fetching roles',
@@ -98,13 +98,13 @@ export default {
 
     fetchRoles();
 
-    const onSearchUser = async (val) => {
-      if (val.length >= 3) {
+    const onSearchUser = async (str_val) => {
+      if (str_val.length >= 3) {
         try {
-          const response = await apiGet('/username/' + encodeURIComponent(val) + '/');
-          filteredUsers.value = response;
-        } catch (error) {
-          console.error('Error searching for users:', error);
+          const obj_response = await apiGet('/username/' + encodeURIComponent(str_val) + '/');
+          filteredUsers.value = obj_response;
+        } catch (obj_error) {
+          console.error('Error searching for users:', obj_error);
         }
       } else {
         filteredUsers.value = [];
@@ -119,26 +119,26 @@ export default {
       }
     }
 
-    const removeUserFromProject = async (user) => {
+    const removeUserFromProject = async (obj_user) => {
       const userStore = useUserStore();
-      const projectRolePerm = userStore.projects.find(project => project.id === props.pid)?.role_perm;
+      const int_projectRolePerm = userStore.projects.find(obj_project => obj_project.id === props.pid)?.role_perm;
 
-      if (projectRolePerm >= 31) {
-        const userToRemove = addedMembers.value.find(u => u.username === user.username);
-        if (userToRemove && projectRolePerm > userToRemove.role_perm) {
+      if (int_projectRolePerm >= 31) {
+        const obj_userToRemove = addedMembers.value.find(obj_u => obj_u.username === obj_user.username);
+        if (obj_userToRemove && int_projectRolePerm > obj_userToRemove.role_perm) {
           try {
-            const response = await apiDelete(`/remove/user/${user.username}/${props.pid}/`);
-            addedMembers.value = addedMembers.value.filter(u => u.username !== user.username);
+            const obj_response = await apiDelete(`/remove/user/${obj_user.username}/${props.pid}/`);
+            addedMembers.value = addedMembers.value.filter(obj_u => obj_u.username !== obj_user.username);
             emit('user-mod');
             $q.notify({
               type: 'positive',
-              message: `User ${user.username} removed successfully`,
+              message: `User ${obj_user.username} removed successfully`,
               position: 'bottom-right'
             });
-          } catch (error) {
+          } catch (obj_error) {
             $q.notify({
               type: 'negative',
-              message: `Error removing user ${user.username}`,
+              message: `Error removing user ${obj_user.username}`,
               position: 'bottom-right'
             });
           }
@@ -158,26 +158,26 @@ export default {
     }
 
     const onSubmit = async () => {
-      for (const user of addedMembers.value) {
-        if(user.role !== undefined){
-          const role_id = roleOptions.value.find(option => option.label === user.role);
-          if(role_id !== undefined){
+      for (const obj_user of addedMembers.value) {
+        if(obj_user.role !== undefined){
+          const obj_role_id = roleOptions.value.find(obj_option => obj_option.label === obj_user.role);
+          if(obj_role_id !== undefined){
             try {
-              const userData = {
-              user: user.username,
+              const obj_userData = {
+              user: obj_user.username,
               project: props.pid,
-              role: role_id.value
+              role: obj_role_id.value
               };
-              const response = await apiPut('/userprojectrole/update/', userData);
+              const obj_response = await apiPut('/userprojectrole/update/', obj_userData);
               $q.notify({
                 type: 'positive',
-                message: `User ${user.username} added successfully`,
+                message: `User ${obj_user.username} added successfully`,
                 position: 'bottom-right'
               });
-            } catch (error) {
+            } catch (obj_error) {
               $q.notify({
                 type: 'negative',
-                message: `Error adding user ${user.username} to project`,
+                message: `Error adding user ${obj_user.username} to project`,
                 position: 'bottom-right'
               });
             }

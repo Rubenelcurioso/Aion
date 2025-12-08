@@ -62,11 +62,11 @@ export default {
 
     const fetchProjects = async () => {
       try {
-        const response = await apiGet('/user/'+`${store.uid}`+'/projects/')    
-        projects.value = response
-        store.setProjects(response)
-      } catch (error) {
-        console.error('Error fetching projects:', error)
+        const obj_response = await apiGet('/user/'+`${store.uid}`+'/projects/')
+        projects.value = obj_response
+        store.setProjects(obj_response)
+      } catch (obj_error) {
+        console.error('Error fetching projects:', obj_error)
       }
     }
 
@@ -79,21 +79,21 @@ export default {
       try {
         await apiDelete(`/remove/project/${projectToDelete.value}/`)
         await fetchProjects()
-      } catch (error) {
-        console.error('Error deleting project:', error)
+      } catch (obj_error) {
+        console.error('Error deleting project:', obj_error)
       }
     }
 
-    const getProgressGradient = (progress) => {
-      let color
-      if (progress >= 75 && progress <= 100) {
-        color = '#66754b' // Positive color
-      } else if (progress >= 50 && progress < 75) {
-        color = '#E9A178' // Warning color
+    const getProgressGradient = (flt_progress) => {
+      let str_color
+      if (flt_progress >= 75 && flt_progress <= 100) {
+        str_color = '#66754b' // Positive color
+      } else if (flt_progress >= 50 && flt_progress < 75) {
+        str_color = '#E9A178' // Warning color
       } else {
-        color = '#C45D4E' // Negative color
+        str_color = '#C45D4E' // Negative color
       }
-      return color;
+      return str_color;
     }
 
     onMounted(fetchProjects)
