@@ -6,30 +6,30 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.exceptions import ValidationError
 
 def validate_age(value):
-    int_age = relativedelta(timezone.now().date(), value).years
-    if int_age < 14:
+    age = relativedelta(timezone.now().date(), value).years
+    if age < 14:
         raise ValidationError('User must be at least 14 years old.')
 
 def validate_fullname(value):
-    b_valid_chars = all(char.isalpha() or char.isspace() for char in value)
-    if not b_valid_chars:
+    valid_chars = all(char.isalpha() or char.isspace() for char in value)
+    if not valid_chars:
         raise ValidationError('Full name should only contain letters and spaces.')
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, str_username, str_email, str_password, **extra_fields):
-        if not str_email:
+    def create_user(self, username, email, password, **extra_fields):
+        if not email:
             raise ValueError('The email field must be set')
-        if not str_password:
+        if not password:
             raise ValueError('The password field must be set')
-        if not str_username:
+        if not username:
             raise ValueError('The username field must be set')
 
-        str_email_normalized = self.normalize_email(str_email)
-        obj_user = self.model(username=str_username, email=str_email_normalized, **extra_fields)
-        obj_user.set_password(str_password)
-        obj_user.save(using=self._db)
-        return obj_user
+        email_normalized = self.normalize_email(email)
+        user = self.model(username=username, email=email_normalized, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
 
 class User(AbstractBaseUser):

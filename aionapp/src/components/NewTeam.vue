@@ -118,13 +118,13 @@ export default {
 
     const $q = useQuasar();
 
-    const onSearchUser = async (str_val) => {
-      if (str_val.length >= 3) {
+    const onSearchUser = async (val) => {
+      if (val.length >= 3) {
         try {
-          const obj_response = await apiGet('/employees/username/'+ props.bid + '/' + encodeURIComponent(str_val) + '/');
-          filteredUsers.value = obj_response;
-        } catch (obj_error) {
-          console.error('Error searching for users:', obj_error);
+          const response = await apiGet('/employees/username/'+ props.bid + '/' + encodeURIComponent(val) + '/');
+          filteredUsers.value = response;
+        } catch (error) {
+          console.error('Error searching for users:', error);
         }
       } else {
         filteredUsers.value = [];
@@ -145,22 +145,22 @@ export default {
 
     const createTeam = async () => {
       try {
-        const obj_teamData = {
+        const teamData = {
           name: teamName.value,
           description: teamDescription.value,
           business: props.bid
         };
 
-        const obj_teamResponse = await apiPost('/new/team/', obj_teamData);
+        const teamResponse = await apiPost('/new/team/', teamData);
 
-        if (obj_teamResponse && obj_teamResponse.id) {
-          for (const str_username of addedMembers.value) {
-            const obj_memberData = {
+        if (teamResponse && teamResponse.id) {
+          for (const username of addedMembers.value) {
+            const memberData = {
               business: props.bid,
-              username: str_username,
-              team: obj_teamResponse.id
+              username: username,
+              team: teamResponse.id
             };
-            await apiPut('/new/member/', obj_memberData);
+            await apiPut('/new/member/', memberData);
           }
           dialogOpen.value = false;
           emit('team-created')
@@ -172,8 +172,8 @@ export default {
         } else {
           throw new Error('Failed to create team');
         }
-      } catch (obj_error) {
-        console.error('Error creating team:', obj_error);
+      } catch (error) {
+        console.error('Error creating team:', error);
         $q.notify({
           type: 'negative',
           message: 'Error creating team',

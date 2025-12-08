@@ -109,23 +109,23 @@ export default defineComponent({
 
     const fetchTasks = async () => {
       try {
-        const obj_response = await apiGet('project/'+route.params.pid+'/tasks/');
-        rows.value = obj_response;
-      } catch (obj_error) {
-        console.error('Error fetching tasks:', obj_error);
+        const response = await apiGet('project/'+route.params.pid+'/tasks/');
+        rows.value = response;
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
       }
     }
 
     const removeSelectedRows = async () => {
       try {
-        for (const obj_row of selected.value) {
-          await apiDelete(`/remove/task/${obj_row.id}/`);
+        for (const row of selected.value) {
+          await apiDelete(`/remove/task/${row.id}/`);
         }
         await fetchTasks();
         selected.value = [];
         $q.notify({ type: 'positive', message: 'Tasks removed successfully', position: 'bottom-right' })
-      } catch (obj_error) {
-        console.error('Error removing tasks:', obj_error);
+      } catch (error) {
+        console.error('Error removing tasks:', error);
         $q.notify({ type: 'negative', message: 'Error removing tasks', position: 'bottom-right' })
       }
     }
