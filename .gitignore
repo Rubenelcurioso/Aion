@@ -114,15 +114,54 @@ logs
 .env.*
 .env*
 !.env.example
-.env-aider
-
-# Cody ignore
-.cody
-ignore
 
 .vscode
-.aider*
-
-.cursorignore
 
 QWEN.md
+
+
+#####################
+# Python / Backend #
+#####################
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+pyvenv.cfg
+
+# Bytecode y cachés
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dll
+
+# Herramientas / tests / tipado
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+
+# Datos y temporales comunes
+*.sqlite
+*.sqlite3
+*.db
+tmp/
+temp/
+*.tmp
+
+########################################
+# Documentos locales no versionados   #
+########################################
+/Análisis de competidores.md
+/Análisis de requisitos.md
+/Historias de usuario.md
