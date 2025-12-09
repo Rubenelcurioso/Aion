@@ -124,14 +124,14 @@ QWEN.md
 # Python / Backend #
 #####################
 
-# Entornos virtuales
+# Virtual environments
 venv/
 .venv/
 env/
 ENV/
 pyvenv.cfg
 
-# Bytecode y cachés
+# Bytecode and caches
 __pycache__/
 **/__pycache__/
 *.py[cod]
@@ -140,7 +140,7 @@ __pycache__/
 *.so
 *.dll
 
-# Herramientas / tests / tipado
+# Tools / tests / typing
 .tox/
 .coverage
 .coverage.*
@@ -151,7 +151,7 @@ htmlcov/
 .pyre/
 .ruff_cache/
 
-# Datos y temporales comunes
+# Data and common temporaries
 *.sqlite
 *.sqlite3
 *.db
@@ -160,7 +160,7 @@ temp/
 *.tmp
 
 ########################################
-# Documentos locales no versionados   #
+# Local unversioned documents          #
 ########################################
 /Análisis de competidores.md
 /Análisis de requisitos.md
