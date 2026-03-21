@@ -6,6 +6,7 @@ A web application designed for individuals and teams to organize tasks, collabor
 - [Highlights](#highlights)
 - [Installation](#installation)
 - [Development Workflow](#development-workflow)
+- [Documentation](#documentation)
 - [Roadmap](#roadmap)
 - [License](#license)
 - [Contact](#contact)
@@ -62,9 +63,16 @@ A web application designed for individuals and teams to organize tasks, collabor
 - **Commits**: Keep them focused and follow Conventional Commits (e.g., `feat: add task batching`).
 - **Pull requests**: Provide testing steps, affected areas, and screenshots if UI changes.
 
+## Documentation
+Comprehensive documentation for the project structure is available in the `docs/` directory:
+- [Backend Documentation](docs/backend/README.md)
+- [Frontend Documentation](docs/frontend/README.md)
+
+Additionally, development conventions and guidelines are outlined in [`COLLABORATION.md`](COLLABORATION.md).
+
 ## Roadmap
 - [x] Refactor structure to improve collaboration and workflow efficiency.
-- [ ] Add comprehensive documentation.
+- [x] Add comprehensive documentation.
 - [ ] Establish automated testing pipelines.
 - [ ] Redesign the UI with a more engaging experience.
 - [ ] Build better collaboration capabilities for enterprise teams.
