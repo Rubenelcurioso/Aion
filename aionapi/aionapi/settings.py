@@ -27,14 +27,16 @@ load_dotenv(BASE_DIR.parent / '.env')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECURITY_KEY_API')
+SECRET_KEY = os.getenv('SECURITY_KEY_API', 'django-insecure-default-key-for-dev-only')
 
-FERNET_KEY = os.getenv('FERNET_KEY', Fernet.generate_key().decode()) # Gen the key if not set
+# Gen the key if not set, fallback gracefully
+fernet_key_env = os.getenv('FERNET_KEY')
+FERNET_KEY = fernet_key_env if fernet_key_env else Fernet.generate_key().decode()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG_API') == 'True'
+DEBUG = os.getenv('DEBUG_API', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'api', '*'] # Note: allow API for docker
 
 
 # Application definition

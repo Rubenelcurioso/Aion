@@ -32,33 +32,29 @@ A web application designed for individuals and teams to organize tasks, collabor
    cd Aion
    ```
 
-2. **Install JavaScript dependencies**
+2. **Set up environment variables**
    ```bash
-   npm install
+   cp .env.example .env
+   # Edit .env with your desired configuration
    ```
 
-3. **Start backend containers**
+3. **Start the application with Docker Compose**
    ```bash
-   docker-compose up -d
+   docker-compose up --build -d
    ```
 
-4. **Launch the Django API**
+4. **Initialize the Database**
    ```bash
-   source venv/bin/activate
-   cd aionapi
-   python manage.py migrate
-   python manage.py createsuperuser
-   python manage.py runserver
+   docker-compose exec api python manage.py migrate
+   docker-compose exec api python manage.py createsuperuser
    ```
 
-5. **Build or run the UI**
-   ```bash
-   cd ../aionapp
-   quasar build     # For production
-   quasar dev       # For development
-   ```
+5. **Access the Application**
+   - **Frontend UI:** [http://localhost:9000](http://localhost:9000) (or the `NODE_PORT` specified in `.env`)
+   - **Backend API:** [http://localhost:8000](http://localhost:8000) (or the `API_PORT` specified in `.env`)
+   - **pgAdmin:** [http://localhost:5050](http://localhost:5050) (or the `PGADMIN_PORT` specified in `.env`)
 
-> _This setup will be further streamlined in upcoming releases._
+> _For local development without Docker, refer to the `aionapi/` and `aionapp/` directories directly._
 
 ## Development Workflow
 - **Feature branches**: Use descriptive names like `feat/notifications` or `fix/auth`.
