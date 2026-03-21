@@ -32,8 +32,8 @@ services:
     ports:
       - "${NODE_PORT}:3000"
     volumes:
-      - ./src/app:/app
-      - /aionapp/node_modules
+      - ./aionapp:/app
+      - /app/node_modules
     working_dir: /app
     environment:
       - API_URL=http://api:8000
@@ -49,18 +49,18 @@ services:
     ports:
       - "${API_PORT}:8000"
     volumes:
-      - ./src/app/api:/api
+      - ./aionapi:/api
     working_dir: /api
     stdin_open: true
     environment:
-      - DJANGO_DEBUG=False
-      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - SECURITY_KEY_API=${SECURITY_KEY_API}
+      - DEBUG_API=${DEBUG_API}
+      - FERNET_KEY=${FERNET_KEY}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=db
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_PORT=5432
-      - POSTGRES_HOST=db
     depends_on:
       - db
 
