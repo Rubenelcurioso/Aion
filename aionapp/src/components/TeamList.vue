@@ -6,11 +6,11 @@
         </div>
       </q-card-section>
   
-      <q-separator color="#FF0000" inset size="2px"/>
+      <q-separator inset size="2px"/>
   
       <q-card-section>
         
-        <q-list class="bg-primary" bordered separator>
+        <q-list class="bg-primary"  separator>
           <q-item v-for="team in teams" :key="team.id" clickable v-ripple>
             <q-item-section avatar>
               <q-avatar :color="team.color" text-color="dark">

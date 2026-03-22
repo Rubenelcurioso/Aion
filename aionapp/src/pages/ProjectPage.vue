@@ -8,7 +8,7 @@
         </div>
       </q-card-section>
 
-      <q-separator color="#FF0000" inset size="2px"/>
+      <q-separator inset size="2px"/>
 
       <q-card-section>
       <q-tabs

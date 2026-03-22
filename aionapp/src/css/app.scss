@@ -1,6 +1,5 @@
 // app global css in SCSS form
 
-
 @font-face {
     font-family: 'courier';
     src: url(./fonts/courier-new-webfont.woff);
@@ -16,28 +15,51 @@
 
 .low-priority {
     background-color: $low-priority !important;
+    color: $accent !important; // Ensures dark text for accessibility against pale background
 }
 
 .medium-priority {
     background-color: $medium-priority !important;
+    color: $accent !important;
 }
 
 .high-priority {
     background-color: $high-priority !important;
+    color: $accent !important;
 }
 
 .todo {
     background-color: $todo !important;
+    color: $accent !important;
 }
 
 .in-progress {
     background-color: $inprogress !important;
+    color: $accent !important;
 }
 
 .done {
     background-color: $done !important;
+    color: $accent !important;
 }
 
 .third {
+    background: $third !important;
+}
+
+/* Minimalist global overrides */
+
+/* Make borders softer globally */
+.q-card, .q-list, .q-input, .q-btn {
+    border-color: $third !important;
+}
+
+/* Increase general whitespace for better structure */
+.q-page {
+    padding: 16px;
+}
+
+/* Ensure clean separators */
+.q-separator {
     background: $third !important;
 }

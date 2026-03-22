@@ -15,14 +15,14 @@
         icon="people"
         :done="step > 1"
       >
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="teamName" label="Team Name" :rules="[
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="teamName" label="Team Name" :rules="[
           val => val && val.length > 0 || 'Team name is required',
           val => val.length <= 255 || 'Team name too long'
         ]" />
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="teamDescription" type="textarea" label="Team Description" />
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="teamDescription" type="textarea" label="Team Description" />
         
         <q-stepper-navigation>
-          <q-btn push @click="step = 2" color="positive" text-color="white" label="Next" />
+          <q-btn unelevated @click="step = 2" color="positive" text-color="white" label="Next" />
         </q-stepper-navigation>
       </q-step>
 
@@ -39,7 +39,7 @@
           </template>
         </q-input>
 
-        <q-list bordered separator class="bg-primary">
+        <q-list  separator class="bg-primary">
           <q-item v-for="user in filteredUsers" :key="user.id" clickable v-ripple @click="addUserToTeam(user)">
             <q-item-section>
               <q-item-label class="text-accent">{{ user }}</q-item-label>
@@ -47,7 +47,7 @@
           </q-item>
         </q-list>
 
-        <q-list bordered class="q-mt-md bg-primary">
+        <q-list  class="q-mt-md bg-primary">
           <q-item-label header class="text-accent bg-dark">Added Members</q-item-label>
           <q-item v-for="user in addedMembers" :key="user.id">
             <q-item-section>
@@ -60,8 +60,8 @@
         </q-list>
 
         <q-stepper-navigation>
-          <q-btn push @click="step = 1" color="negative" text-color="white" label="Back" class="q-mr-sm" />
-          <q-btn push @click="step = 3" color="positive" text-color="white" label="Next" />
+          <q-btn unelevated @click="step = 1" color="negative" text-color="white" label="Back" class="q-mr-sm" />
+          <q-btn unelevated @click="step = 3" color="positive" text-color="white" label="Next" />
         </q-stepper-navigation>
       </q-step>
 
@@ -81,13 +81,13 @@
         </q-card>
 
         <q-stepper-navigation>
-          <q-btn push @click="step = 1" color="negative" text-color="white" label="Back" class="q-mr-sm" />
-          <q-btn push @click="createTeam" color="positive" text-color="white" label="Create Team" />
+          <q-btn unelevated @click="step = 1" color="negative" text-color="white" label="Back" class="q-mr-sm" />
+          <q-btn unelevated @click="createTeam" color="positive" text-color="white" label="Create Team" />
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
     <q-card-actions align="right" class="bg-dark">
-      <q-btn  push label="Close" color="negative" v-close-popup />
+      <q-btn  unelevated label="Close" color="negative" v-close-popup />
     </q-card-actions>
   </q-card>
   </q-dialog>

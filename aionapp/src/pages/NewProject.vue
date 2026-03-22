@@ -14,13 +14,13 @@
         icon="assignment"
         :done="step > 1"
       >
-        <q-input standout="bg-primary text-accent q-ma-md" outlined bg-color="primary" color="accent" text-color="accent" v-model="projectName" label="Project Name" />
-        <q-input standout="bg-primary text-accent q-ma-md" outlined bg-color="primary" color="accent" text-color="accent" v-model="projectDescription" type="textarea" label="Project Description" />
-        <q-input standout="bg-primary text-accent q-ma-md" outlined bg-color="primary"  color="accent" text-color="accent" v-model="startDate" type="date" label="Start Date" />
-        <q-input standout="bg-primary text-accent q-ma-md" outlined bg-color="primary" color="accent" text-color="accent" v-model="endDate" type="date" label="End Date" />
+        <q-input outlined class="q-ma-md" bg-color="primary" color="accent" text-color="accent" v-model="projectName" label="Project Name" />
+        <q-input outlined class="q-ma-md" bg-color="primary" color="accent" text-color="accent" v-model="projectDescription" type="textarea" label="Project Description" />
+        <q-input outlined class="q-ma-md" bg-color="primary"  color="accent" text-color="accent" v-model="startDate" type="date" label="Start Date" />
+        <q-input outlined class="q-ma-md" bg-color="primary" color="accent" text-color="accent" v-model="endDate" type="date" label="End Date" />
         
         <q-stepper-navigation>
-          <q-btn push text-color="white" @click="step = 2" color="positive" label="Next" />
+          <q-btn unelevated text-color="white" @click="step = 2" color="positive" label="Next" />
         </q-stepper-navigation>
       </q-step>
 
@@ -31,13 +31,13 @@
         icon="people"
         :done="step > 2"
       >
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="searchUser" label="Search User" @update:model-value="onSearchUser" >
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="searchUser" label="Search User" @update:model-value="onSearchUser" >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
 
-        <q-list bordered separator class="bg-primary">
+        <q-list  separator class="bg-primary">
           <q-item v-for="user in filteredUsers" :key="user.id" clickable v-ripple @click="addUserToProject(user)">
             <q-item-section>
               <q-item-label class="text-accent">{{ user }}</q-item-label>
@@ -45,7 +45,7 @@
           </q-item>
         </q-list>
 
-        <q-list bordered class="q-mt-md" >
+        <q-list  class="q-mt-md" >
           <q-item-label header class="text-accent bg-dark">Added Users</q-item-label>
           <q-item v-for="user in addedUsers" :key="user.id" class="bg-primary">
             <q-item-section>
@@ -68,8 +68,8 @@
         </q-list>
 
         <q-stepper-navigation>
-          <q-btn  push text-color="white" @click="step = 1" color="negative" label="Back" class="q-mr-sm" />
-          <q-btn push text-color="white" @click="createProject" color="positive" label="Create Project" />
+          <q-btn  unelevated text-color="white" @click="step = 1" color="negative" label="Back" class="q-mr-sm" />
+          <q-btn unelevated text-color="white" @click="createProject" color="positive" label="Create Project" />
         </q-stepper-navigation>
       </q-step>
     </q-stepper>

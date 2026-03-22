@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-h6 text-accent">Users</div>
-    <q-separator color="#FF0000" inset size="2px"/>
+    <q-separator inset size="2px"/>
     <q-table
       flat
       table-class="text-accent"

@@ -8,7 +8,7 @@
           </template>
         </q-input>
 
-        <q-list bordered separator class="bg-white text-accent">
+        <q-list  separator class="bg-white text-accent">
           <q-item v-for="user in filteredUsers" :key="user.id" clickable v-ripple @click="addUserToProject(user)">
             <q-item-section>
               <q-item-label>{{ user }}</q-item-label>
@@ -16,9 +16,9 @@
           </q-item>
         </q-list>
 
-        <q-list bordered class="q-mt-md bg-primary">
+        <q-list  class="q-mt-md bg-primary">
           <q-item-label header class="text-accent">Added members</q-item-label>
-          <q-separator color="#FF0000" inset size="2px" class="q-ma-sm"/>
+          <q-separator inset size="2px" class="q-ma-sm"/>
           <q-item v-for="user in addedMembers" :key="user.id" class="bg-primary">
             <q-item-section>
               <q-item-label class="text-accent">{{ user.username }}</q-item-label>
@@ -46,8 +46,8 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn push label="Save" color="positive" @click="onSubmit" />
-        <q-btn push label="Close" color="negative" v-close-popup @click="closeDialog" />
+        <q-btn unelevated label="Save" color="positive" @click="onSubmit" />
+        <q-btn unelevated label="Close" color="negative" v-close-popup @click="closeDialog" />
       </q-card-actions>
     </q-card>
   </q-dialog>

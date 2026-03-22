@@ -5,7 +5,7 @@
         <div class="text-h6 text-white">Business information</div>
       </q-card-section>
 
-      <q-separator color="#FF0000" inset size="2px"/>
+      <q-separator inset size="2px"/>
 
       <q-card-section class="q-ma-none bg-white">
         <div class="text-h6 text-accent">{{ business.name }}</div>
@@ -13,19 +13,19 @@
       </q-card-section>
 
       <q-card-section class="q-ma-none bg-white">
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="business.description" label="Description" :readonly="!isOwner" />
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="business.description" label="Description" :readonly="!isOwner" />
       </q-card-section>
 
       <q-card-section class="q-ma-none bg-white">
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="business.email" label="Email" :readonly="!isOwner" />
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="business.email" label="Email" :readonly="!isOwner" />
       </q-card-section>
 
       <q-card-section class="q-ma-none bg-white">
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" color="accent" text-color="accent" v-model="business.phone" label="Phone" :readonly="!isOwner" />
+        <q-input outlined bg-color="primary" color="accent" text-color="accent" v-model="business.phone" label="Phone" :readonly="!isOwner" />
       </q-card-section>
 
       <q-card-actions align="right" v-if="isOwner" class="bg-white">
-        <q-btn push text-color="white" color="warning" label="Save" @click="saveBusiness" />
+        <q-btn unelevated text-color="white" color="warning" label="Save" @click="saveBusiness" />
       </q-card-actions>
     </q-card>
 
@@ -34,10 +34,10 @@
         <div class="text-h6 text-white">Employee Management</div>
       </q-card-section>
 
-      <q-separator color="#FF0000" inset size="2px"/>
+      <q-separator inset size="2px"/>
 
       <q-card-section class="bg-white">
-        <q-list bordered separator class="bg-primary text-accent">
+        <q-list  separator class="bg-primary text-accent">
           <q-item v-for="employee in employees" :key="employee.id" dark>
             <q-item-section>
               <q-item-label class="text-accent">{{ employee.username }}</q-item-label>
@@ -51,7 +51,7 @@
       </q-card-section>
 
       <q-card-actions align="right" v-if="isOwner" class="bg-white">
-        <q-btn push text-color="white" color="positive" label="Add employee" @click="showNewEmployeeDialog = true" />
+        <q-btn unelevated text-color="white" color="positive" label="Add employee" @click="showNewEmployeeDialog = true" />
         <NewEmployee v-model="showNewEmployeeDialog" :bid="route.params.bid" @employee-added="onEmployeeAdded" />
       </q-card-actions>
     </q-card>
@@ -61,10 +61,10 @@
         <div class="text-h6 text-white">Team Management</div>
       </q-card-section>
 
-      <q-separator color="#FF0000" inset size="2px"/>
+      <q-separator inset size="2px"/>
 
       <q-card-section class="bg-white">
-        <q-list bordered separator class="bg-primary text-accent">
+        <q-list  separator class="bg-primary text-accent">
           <q-item v-for="team in teams" :key="team.id" clickable v-ripple dark @click="openTeamEditDialog(team)">
             <q-item-section>
               <q-item-label class="text-accent">{{ team.name }}</q-item-label>
@@ -77,7 +77,7 @@
       </q-card-section>
 
       <q-card-actions align="right" v-if="isOwner" class="bg-white">
-        <q-btn push text-color="white" color="positive" label="Add Team" @click="showNewTeamDialog = true" />
+        <q-btn unelevated text-color="white" color="positive" label="Add Team" @click="showNewTeamDialog = true" />
         <NewTeam v-model="showNewTeamDialog" :bid="route.params.bid" @team-created="onTeamCreated" />
       </q-card-actions>
     </q-card>

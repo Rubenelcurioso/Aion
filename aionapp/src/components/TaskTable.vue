@@ -1,7 +1,7 @@
 <template>
   <div class="q-ma-none bg-white">
     <div class="text-h6 text-accent">Tasks</div>
-    <q-separator color="#FF0000" inset size="2px"/>
+    <q-separator inset size="2px"/>
     <q-table    
       flat
       table-class="text-accent"
@@ -18,9 +18,9 @@
     <template v-slot:top>
       <div>
         <q-btn-group rounded unelevated>
-          <q-btn push icon="add" color="positive" @click="showDialog" label="New task" class="q-mr-none" :disable="userRolePerm < 7" />
-          <q-btn push icon="edit" color="warning" @click="editSelectedRow" label="Edit selected" :disable="!selected.length || userRolePerm < 7" class="q-mr-none" />
-          <q-btn push icon="delete" color="negative" @click="removeSelectedRows" label="Remove selected" :disable="!selected.length || userRolePerm < 7" />
+          <q-btn unelevated icon="add" color="positive" @click="showDialog" label="New task" class="q-mr-none" :disable="userRolePerm < 7" />
+          <q-btn unelevated icon="edit" color="warning" @click="editSelectedRow" label="Edit selected" :disable="!selected.length || userRolePerm < 7" class="q-mr-none" />
+          <q-btn unelevated icon="delete" color="negative" @click="removeSelectedRows" label="Remove selected" :disable="!selected.length || userRolePerm < 7" />
         </q-btn-group>
       </div>
     </template>

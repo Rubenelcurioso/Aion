@@ -12,29 +12,29 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #FAF0E6;
-$secondary : #A57F60;
-$accent    : #4A3831;
-$third     : #E8D0B3;
-$tertiary    : #DEB887;
+$primary   : #F5F4F1; // Soft, off-white background (Anthropic style)
+$secondary : #E6E4DD; // Muted beige/gray for secondary elements, cards, etc.
+$accent    : #2E2D2B; // Dark warm gray for text and primary icons (accessible)
+$third     : #D6D2C4; // Slightly darker beige for borders/separators
+$tertiary  : #A8A394; // Muted grayish-brown for disabled/less important elements
 
-$dark      : #A57F60;
-$dark-page : #2C1810;
+$dark      : #1C1B1A; // Very dark warm gray
+$dark-page : #131211;
 
-$positive  : #66754b;
-$negative  : #C45D4E;
-$info      : #7B8FA3;
-$warning   : #E9A178;
+$positive  : #4A6354; // Muted, earthy forest green (high contrast for AA)
+$negative  : #8B4A45; // Muted terracotta/rust red
+$info      : #4A5D6B; // Soft, muted slate blue
+$warning   : #9C7144; // Muted earthy orange/brown
 
-$low-priority      : #add8e6;
-$medium-priority   : #ffa500;
-$high-priority     : #c62828;
+$low-priority      : #D0DED4; // Soft pale green
+$medium-priority   : #EADCB6; // Soft warm sand/orange
+$high-priority     : #E2BDBA; // Soft pale rose
 
-$todo      : #c8e6c9;
-$inprogress: #add8e6;
-$done      : #4caf50;
+$todo      : #E0E0E0; // Soft pale gray
+$inprogress: #D2DCE6; // Soft pale blue
+$done      : #D0DED4; // Soft pale green
 
-$generic-border-radius: 12px;
-$table-hover-background: rgb(250,240,230, 0.3);
-$table-dark-hover-background : rgb(42, 42, 42, 0.3);
+$generic-border-radius: 6px; // Slightly sharper for modern minimal feel
+$table-hover-background: rgba(46, 45, 43, 0.05); // Very subtle hover using $accent base
+$table-dark-hover-background : rgba(245, 244, 241, 0.1); // Light subtle hover
 $separator-color: $third;

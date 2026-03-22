@@ -1,16 +1,16 @@
 <template>
   <div class="bg-white">
     <div class="text-h6 text-accent">Project properties</div>
-    <q-separator color="#FF0000" inset size="2px"/>
+    <q-separator inset size="2px"/>
     <p class="text-accent q-mt-md q-mb-none sans-serif">Created at</p>
-    <q-input standout v-model="creationDate" label="" class="text-accent bg-primary" readonly/>
+    <q-input outlined v-model="creationDate" label="" class="text-accent bg-primary" readonly/>
     <p class="text-accent q-mt-sm q-mb-none sans-serif">End date</p>
-    <q-input standout v-model="endingDate" label=" " class="text-accent bg-primary" readonly/>
+    <q-input outlined v-model="endingDate" label=" " class="text-accent bg-primary" readonly/>
     <p class="text-accent q-mt-sm q-mb-none sans-serif">Progress: {{ progression }}%</p>
     <q-linear-progress :value="progression/100" size="20px" rounded color="info" class="q-mt-sm q-mb-sm" />
     <p class="text-accent q-mt-sm q-mb-none sans-serif">Business</p>
-    <q-input standout v-model="businessName" label=" " class="text-accent bg-primary generic-border-radius" readonly/>
-    <q-btn push label="Edit Project" color="warning" @click="editProjectDialog" class="text-accent q-mt-md" />
+    <q-input outlined v-model="businessName" label=" " class="text-accent bg-primary generic-border-radius" readonly/>
+    <q-btn unelevated label="Edit Project" color="warning" @click="editProjectDialog" class="text-accent q-mt-md" />
   </div>
 
   <q-dialog v-model="editDialogVisible" backdrop-filter="blur(10px)">

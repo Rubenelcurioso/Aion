@@ -7,16 +7,16 @@
 
     <q-form @submit="onSubmit" class="q-gutter-md">
       <q-card-section class="q-ml-xs q-mt-md q-ma-none">
-        <q-input standout="bg-primary text-accent" outlined bg-color="primary" v-model="taskName" label="Task Name" :rules="taskNameRules" />
+        <q-input outlined bg-color="primary" v-model="taskName" label="Task Name" :rules="taskNameRules" />
       </q-card-section>
 
       <q-card-section class="q-ml-xs q-ma-none">
         <div class="row q-col-gutter-md">
           <div class="col-6">
-            <q-input standout="bg-primary text-accent" outlined bg-color="primary" v-model="startDate" label="Start Date" type="date" :rules="startDateRules" text-color="accent" />
+            <q-input outlined bg-color="primary" v-model="startDate" label="Start Date" type="date" :rules="startDateRules" text-color="accent" />
           </div>
           <div class="col-6">
-            <q-input standout="bg-primary text-accent" outlined bg-color="primary" v-model="endDate" label="End Date" type="date" :rules="endDateRules" text-color="accent" />
+            <q-input outlined bg-color="primary" v-model="endDate" label="End Date" type="date" :rules="endDateRules" text-color="accent" />
           </div>
         </div>
       </q-card-section>
@@ -85,7 +85,7 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn push unelevated text-color="white" type="submit" color="positive" label="Submit" />
+        <q-btn unelevated text-color="white" type="submit" color="positive" label="Submit" />
       </q-card-actions>
     </q-form>
   </q-card>

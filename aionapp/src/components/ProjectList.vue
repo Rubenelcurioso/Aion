@@ -6,12 +6,12 @@
       </div>
     </q-card-section>
 
-    <q-separator color="#FF0000" inset size="2px"/>
+    <q-separator inset size="2px"/>
 
     <q-card-section>
-      <q-btn push color="dark" class="q-mb-sm" icon="add" label="Create a project" to="/new/project/" />
+      <q-btn unelevated color="dark" class="q-mb-sm" icon="add" label="Create a project" to="/new/project/" />
       
-      <q-list class="bg-primary" bordered>
+      <q-list class="bg-primary" >
         <q-item v-for="project in store.projects" :key="project.id" clickable v-ripple :to="`/home/${store.uid}/project/${project.id}`">
           <q-item-section avatar>
             <q-avatar :color="project.color || 'teal'" text-color="white">

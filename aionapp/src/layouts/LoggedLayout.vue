@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh LpR lFf">
-      <q-header bordered class="bg-secondary text-black">
+      <q-header  class="bg-secondary text-black">
         <q-toolbar>
           <DrawerButton @toggle-drawer="toggleDrawer" />
   
